@@ -1,7 +1,3 @@
-FROM centos:latest
-
-RUN  yum update
-
-RUN  yum install httpd -y
+FROM hshar/webapp
 
 ADD . /var/www/html/
