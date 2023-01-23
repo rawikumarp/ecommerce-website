@@ -1,7 +1,7 @@
 FROM centos:latest
 
-RUN sudo yum update
+RUN  yum update
 
-RUN sudo yum install httpd -y
+RUN  yum install httpd -y
 
 ADD . /var/www/html/
