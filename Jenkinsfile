@@ -4,27 +4,26 @@ pipeline {
     stage('Build') {
       steps {
         node(label: 'centos7-node')
-        echo 'Building'
-        sh '''docker rm -f $(sudo docker ps -a -q)
-docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
-docker run -it -p 81:80 -d ecommerce-website'''
+        git(url: 'https://github.com/rawikumarp/ecommerce-website.git', branch: 'master')
+        sh 'mvn clean compile package'
+        echo 'Building and Packaging'
       }
     }
 
     stage('Test') {
       steps {
-        echo 'Testing'
         junit 'target/**/8.xml'
+        echo 'Testing'
       }
     }
 
     stage('Deploy') {
       steps {
         node(label: 'centos7-node')
-        echo 'Deploying'
         sh '''docker rm -f $(sudo docker ps -a -q)
 docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
 docker run -it -p 81:80 -d ecommerce-website'''
+        echo 'Deploying'
       }
     }
 
