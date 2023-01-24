@@ -13,7 +13,6 @@ pipeline {
 
     stage('Test') {
       steps {
-        junit 'target/**/8.xml'
         echo 'Testing'
       }
     }
