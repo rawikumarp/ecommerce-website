@@ -20,7 +20,8 @@ pipeline {
     stage('Deploy') {
       steps {
         node(label: 'centos7-node') {
-          sh '''docker rm -f $(sudo docker ps -a -q)
+          sh '''chmod 777 /var/run/docker.sock
+docker rm -f $(sudo docker ps -a -q)
 docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
 docker run -it -p 81:80 -d ecommerce-website'''
           echo 'Deploying'
