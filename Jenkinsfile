@@ -4,9 +4,9 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building'
-        sh '''sudo docker rm -f $(sudo docker ps -a -q)
-sudo docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
-sudo docker run -it -p 81:80 -d ecommerce-website'''
+        sh '''docker rm -f $(sudo docker ps -a -q)
+docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
+docker run -it -p 81:80 -d ecommerce-website'''
         node(label: 'centos7-node')
       }
     }
@@ -22,9 +22,9 @@ sudo docker run -it -p 81:80 -d ecommerce-website'''
       steps {
         echo 'Deploying'
         node(label: 'centos7-node')
-        sh '''sudo docker rm -f $(sudo docker ps -a -q)
-sudo docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
-sudo docker run -it -p 81:80 -d ecommerce-website'''
+        sh '''docker rm -f $(sudo docker ps -a -q)
+docker build /home/linuxuser/jenkins/workspace/git-job-ecommerce -t  ecommerce-website
+docker run -it -p 81:80 -d ecommerce-website'''
       }
     }
 
