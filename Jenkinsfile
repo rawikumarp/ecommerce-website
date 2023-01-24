@@ -5,7 +5,6 @@ pipeline {
       steps {
         node(label: 'centos7-node') {
           git(url: 'https://github.com/rawikumarp/ecommerce-website.git', branch: 'master')
-          sh 'mvn clean compile package'
         }
 
         echo 'Building and Packaging'
